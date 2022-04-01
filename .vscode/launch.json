@@ -2,6 +2,55 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": ".NET Core Launch (console)",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"stopAtEntry": false,
+			"console": "internalConsole"
+		},
+		{
+			"name": ".NET Core Launch (console)",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"stopAtEntry": false,
+			"console": "internalConsole"
+		},
+
+		{
+			"name": "Cloud Run: Run/Debug Locally",
+			"type": "cloudcode.cloudrun",
+			"request": "launch",
+			"build": {
+				"buildpacks": {
+					"path": "go.mod",
+					"builder": "gcr.io/buildpacks/builder:v1"
+				}
+			},
+			"image": "vscode-go",
+			"service": {
+				"name": "vscode-go",
+				"containerPort": 8080,
+				"resources": {
+					"limits": {
+						"memory": "256Mi"
+					}
+				}
+			},
+			"target": {
+				"minikube": {}
+			},
+			"watch": true,
+			"externalPortForward": 3000
+		},
+		{
 			"name": "Launch tools/generate",
 			"type": "go",
 			"request": "launch",
@@ -13,22 +62,21 @@
 			"name": "Launch Extension",
 			"type": "extensionHost",
 			"request": "launch",
-			// path to VSCode executable
 			"runtimeExecutable": "${execPath}",
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}",
 				"--disable-extensions"
 			],
 			"outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
-            ],
+				"${workspaceFolder}/dist/**/*.js"
+			],
 			"stopOnEntry": false,
 			"sourceMaps": true,
 			"smartStep": true,
 			"preLaunchTask": "npm: bundle-dev",
 			"env": {
-				"VSCODE_GO_IN_TEST": ""  // Enable code
-			},
+				"VSCODE_GO_IN_TEST": ""
+			}
 		},
 		{
 			"name": "Launch as server",
@@ -51,7 +99,6 @@
 			"type": "extensionHost",
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
-			// the workspace path should be GOPATH
 			"args": [
 				"--disable-extensions",
 				"--extensionDevelopmentPath=${workspaceFolder}",
@@ -61,8 +108,8 @@
 				"999999"
 			],
 			"env": {
-				"VSCODE_GO_IN_TEST": "1",  // Disable code that shouldn't be used in test
-				"MOCHA_TIMEOUT": "999999",
+				"VSCODE_GO_IN_TEST": "1",
+				"MOCHA_TIMEOUT": "999999"
 			},
 			"stopOnEntry": false,
 			"sourceMaps": true,
@@ -78,16 +125,16 @@
 			"type": "extensionHost",
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
-			// the workspace path should be GOPATH
 			"args": [
 				"--disable-extensions",
 				"--extensionDevelopmentPath=${workspaceFolder}",
 				"--extensionTestsPath=${workspaceFolder}/out/test/gopls/index",
 				"--user-data-dir=${workspaceFolder}/.user-data-dir-test",
-				"--timeout", "999999",
+				"--timeout",
+				"999999"
 			],
 			"env": {
-				"VSCODE_GO_IN_TEST": "1"  // Disable code that shouldn't be used in test
+				"VSCODE_GO_IN_TEST": "1"
 			},
 			"stopOnEntry": false,
 			"sourceMaps": true,
@@ -95,7 +142,7 @@
 				"${workspaceFolder}/out/**/*.js",
 				"${workspaceFolder}/out/test/**/*.js"
 			],
-			"preLaunchTask": "npm: watch",
+			"preLaunchTask": "npm: watch"
 		},
 		{
 			"type": "node",
@@ -111,8 +158,8 @@
 				"${workspaceFolder}/out/test/unit"
 			],
 			"internalConsoleOptions": "openOnSessionStart",
-			"preLaunchTask": "npm: watch",
-		},
+			"preLaunchTask": "npm: watch"
+		}
 	],
 	"compounds": [
 		{
